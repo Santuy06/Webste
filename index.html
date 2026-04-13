@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website resmi SMAN 1 Bantarbolang - Portal informasi sekolah, PPDB, akademik, dan kegiatan siswa.">
+  <title>SMAN 1 Bantarbolang – Beranda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== SEARCH SPOTLIGHT OVERLAY ===== -->
+<div class="spotlight-overlay" id="spotlightOverlay">
+  <div class="spotlight-inner">
+    <div class="spotlight-input-wrap">
+      <svg class="spotlight-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="spotlightInput" placeholder="Cari berita, program, PPDB…" autocomplete="off">
+      <button id="spotlightClose" class="spotlight-esc" title="Tutup (Esc)">ESC</button>
+    </div>
+    <div class="spotlight-results" id="spotlightResults"></div>
+    <div class="spotlight-hint">Tekan <kbd>Enter</kbd> untuk cari · <kbd>Esc</kbd> untuk tutup</div>
+  </div>
+</div>
+
+<!-- ===== HEADER / NAVBAR ===== -->
+<header class="site-header">
+
+  <!-- Kolom Logo (putih) -->
+  <div class="header-logo">
+    <img src="logo.png" alt="Logo SMAN 1 Bantarbolang" class="logo-img">
+    <div class="logo-text">
+      <span class="logo-name">SMAN 1</span>
+      <span class="logo-sub">Bantarbolang</span>
+    </div>
+  </div>
+
+  <!-- Kolom Nav (dark navy) -->
+  <div class="header-nav-area">
+    <nav class="top-nav">
+      <ul class="nav-list">
+
+        <!-- Profil -->
+        <li class="nav-item has-dropdown">
+          <span class="nav-link">Profil <span class="nav-arrow">˅</span></span>
+          <div class="nav-dropdown">
+            <ul>
+              <li><a href="#">Visi Misi</a></li>
+              <li><a href="#">Sejarah</a></li>
+              <li><a href="#">Struktur Organisasi</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Akademik -->
+        <li class="nav-item has-dropdown">
+          <span class="nav-link">Akademik <span class="nav-arrow">˅</span></span>
+          <div class="nav-dropdown">
+            <ul>
+              <li><a href="#">Kurikulum</a></li>
+              <li><a href="#">Tenaga Pendidik</a></li>
+              <li><a href="#">Sarana Prasarana</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Informasi Publik -->
+        <li class="nav-item has-dropdown">
+          <span class="nav-link">Informasi Publik <span class="nav-arrow">˅</span></span>
+          <div class="nav-dropdown">
+            <ul>
+              <li><a href="#">Berita</a></li>
+              <li><a href="#">Agenda</a></li>
+              <li><a href="#">Galeri</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- PPDB -->
+        <li class="nav-item has-dropdown">
+          <span class="nav-link">PPDB <span class="nav-arrow">˅</span></span>
+          <div class="nav-dropdown">
+            <ul>
+              <li><a href="#">Pendaftaran Online</a></li>
+              <li><a href="#">Jadwal PPDB</a></li>
+              <li><a href="#">Pengumuman Kelulusan</a></li>
+            </ul>
+          </div>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Aksi kanan: Search + CTA -->
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="searchTrigger" title="Cari">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <a href="#ppdb-section" class="btn-cta">PPDB 2024/2025 &rsaquo;</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb-bar">
+  <span>Beranda</span>
+  <span class="bc-sep">&rsaquo;</span>
+  <span>Akademik</span>
+  <span class="bc-sep">&rsaquo;</span>
+  <span class="bc-current">Pengumuman</span>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Selamat Datang di<br>SMAN 1 Bantarbolang</h1>
+    <p>Indonesian high school pendaftaran online untuk wilayah Bantarbolang. Selamat Datang di portal resmi penerimaan peserta didik baru (PPDB) SMAN 1 Bantarbolang.</p>
+    <a href="#ppdb-section" class="btn-hero">Learn More &rsaquo;</a>
+  </div>
+</section>
+
+<!-- ===== MODAL POP-UP PENGUMUMAN ===== -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close-btn" id="modalCloseBtn" title="Tutup">&times;</button>
+    <h2 class="modal-title" id="modalTitle">PENGUMUMAN PENTING</h2>
+    <div class="modal-divider"></div>
+    <h3 class="modal-subtitle">Hasil Seleksi Administrasi PPDB 2024<br>Telah Diumumkan</h3>
+    <p class="modal-body">Cek status pendaftaran Anda. Unduh daftar nama yang lolos seleksi melalui link berikut:</p>
+    <div class="modal-actions">
+      <button class="btn-modal-dark" id="btnCekStatus">Cek Status Pendaftaran</button>
+      <button class="btn-modal-gold" id="btnUnduhDaftar">Unduh Daftar Lulus</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PPDB SECTION ===== -->
+<section class="ppdb-section" id="ppdb-section">
+  <div class="ppdb-img">
+    <img
+      src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop&q=80"
+      alt="Siswa SMA belajar bersama"
+      loading="lazy">
+  </div>
+  <div class="ppdb-info">
+    <h2 class="ppdb-title"><span class="text-gold">PPDB</span> Pendaftaran Online</h2>
+    <p>SMAN 1 Bantarbolang memfasilitasi seleksi penerimaan siswa baru, pendaftaran online, dan penjabaran jalur pendaftaran seperti prestasi, zonasi, dan afirmasi.</p>
+    <div class="ppdb-btn-group">
+      <a href="#" class="btn-ppdb">Learn More &rsaquo;</a>
+      <!-- External / New Window: membuka portal resmi di tab baru -->
+      <a href="external.html" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn-external"
+         title="Membuka Portal Resmi PPDB di tab/window baru">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Portal PPDB Dinas Pendidikan
+        <span class="ext-badge">Tab Baru</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-col">
+    <div class="footer-logo-wrap">
+      <img src="logo.png" alt="Logo SMANBA" width="52">
+      <div>
+        <strong>SMAN 1 Bantarbolang</strong>
+        <p>Sekolah Menengah Atas Negeri 1 Bantarbolang</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Alamat</h4>
+    <p>Jl. Raya Bantarbolang, Kecamatan Bantarbolang,<br>Kabupaten Pemalang, Jawa Tengah 52371</p>
+  </div>
+  <div class="footer-col">
+    <h4>Kontak</h4>
+    <p>📞 (0284) 321234</p>
+    <p>✉️ sman1bantarbolang@gmail.com</p>
+    <p>🌐 sman1bantarbolang.sch.id</p>
+  </div>
+  <div class="footer-col">
+    <h4>Sosial Media</h4>
+    <div class="social-links">
+      <a href="#" class="social-link">Facebook</a>
+      <a href="#" class="social-link">Instagram</a>
+      <a href="#" class="social-link">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 SMAN 1 Bantarbolang. Hak cipta dilindungi.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
