@@ -18,26 +18,93 @@
   </div>
 </header>
 
-<section style="padding:60px;">
-  <h1>Link External</h1>
-  <p>Halaman ini berisi link ke website luar resmi.</p>
+<section class="portal-section">
+  <div class="portal-container">
+    <div class="portal-header">
+      <h1>Portal PPDB Online Terpadu</h1>
+      <p>Silakan lengkapi formulir pendaftaran di bawah ini. Pastikan data yang diinput sesuai dengan dokumen asli.</p>
+    </div>
 
-  <div style="margin-top:30px; display:flex; flex-direction:column; gap:15px; max-width:400px;">
+    <!-- Stepper (Output Feedback / Progress) -->
+    <div class="stepper-ui">
+      <div class="step active">
+        <div class="step-circle">1</div>
+        <span>Data Diri</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <span>Berkas</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <span>Selesai</span>
+      </div>
+    </div>
 
-    <a href="https://ppdb.jatengprov.go.id" target="_blank" class="btn-external">
-      Portal PPDB Jateng
-    </a>
+    <form class="portal-form" id="ppdbForm">
+      <!-- Input Text -->
+      <div class="form-group">
+        <label for="nisn">NISN <span class="req">*</span></label>
+        <input type="text" id="nisn" name="nisn" placeholder="Masukkan 10 digit NISN" required pattern="\d{10}">
+        <span class="error-msg">Format NISN tidak valid (harus 10 angka).</span>
+      </div>
 
-    <a href="https://kemdikbud.go.id" target="_blank" class="btn-external">
-      Website Kemendikbud
-    </a>
+      <div class="form-group">
+        <label for="namaLengkap">Nama Lengkap <span class="req">*</span></label>
+        <input type="text" id="namaLengkap" name="nama" placeholder="Sesuai Ijazah/Akte Kelahiran" required>
+      </div>
 
-    <a href="https://dapo.kemdikbud.go.id" target="_blank" class="btn-external">
-      Dapodik
-    </a>
+      <!-- UI Control: Select (Dropdown) -->
+      <div class="form-group">
+        <label for="jalurDaftar">Jalur Pendaftaran <span class="req">*</span></label>
+        <select id="jalurDaftar" name="jalur" required>
+          <option value="" disabled selected>-- Pilih Jalur --</option>
+          <option value="zonasi">Zonasi</option>
+          <option value="prestasi">Prestasi</option>
+          <option value="afirmasi">Afirmasi</option>
+          <option value="pindah">Perpindahan Orang Tua</option>
+        </select>
+      </div>
 
+      <!-- UI Control: Radio Buttons -->
+      <div class="form-group">
+        <label>Jenis Kelamin <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="jk" value="L" required>
+            <span class="custom-radio"></span> Laki-laki
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="jk" value="P" required>
+            <span class="custom-radio"></span> Perempuan
+          </label>
+        </div>
+      </div>
+
+      <!-- UI Control: File Upload -->
+      <div class="form-group">
+        <label for="fileKK">Unggah Kartu Keluarga (KK) <span class="req">*</span></label>
+        <div class="file-upload-wrapper">
+          <input type="file" id="fileKK" name="kk" accept=".pdf, .jpg, .png" class="file-input" required>
+          <div class="file-dummy" id="fileDummyTarget">
+            <span class="file-btn">Pilih File</span>
+            <span class="file-name" id="fileNameDisp">Belum ada file terpilih (PDF, JPG)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" onclick="window.close()">Batal</button>
+        <button type="submit" class="btn-primary" id="btnSubmitForm">Kirim Pendaftaran</button>
+      </div>
+    </form>
   </div>
 </section>
+
+<!-- Toast Notification Container (Output UI Control) -->
+<div id="toastContainer" class="toast-container"></div>
 
 </body>
 </html>

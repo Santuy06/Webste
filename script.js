@@ -151,7 +151,100 @@ btnCekStatus.addEventListener('click', () => {
 
 btnUnduhDaftar.addEventListener('click', () => {
   closeModal();
-  alert('File daftar lulus sedang dipersiapkan. Silakan cek kembali nanti.');
+  showToast('File daftar lulus sedang dipersiapkan. Silakan cek kembali nanti.', 'warning');
+});
+
+// =====================================================
+// Toast Notification System (Custom Output UI Control)
+// =====================================================
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  if (!container) return; // Berlaku jika berada di halaman yang tidak memiliki container (index.html bisa ditambahkan)
+
+  const toast = document.createElement('div');
+  toast.className = `toast-item toast-${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">
+      ${type === 'success' ? '✓' : type === 'warning' ? '!' : 'i'}
+    </div>
+    <div class="toast-msg">${message}</div>
+    <button class="toast-close">&times;</button>
+  `;
+
+  container.appendChild(toast);
+
+  // Trigger animasi masuk
+  setTimeout(() => toast.classList.add('show'), 10);
+
+  // Auto remove setelah 4 detik
+  const timer = setTimeout(() => hideToast(toast), 4000);
+
+  // Close button
+  toast.querySelector('.toast-close').addEventListener('click', () => {
+    clearTimeout(timer);
+    hideToast(toast);
+  });
+}
+
+function hideToast(toast) {
+  toast.classList.remove('show');
+  setTimeout(() => toast.remove(), 300);
+}
+
+// =====================================================
+// Form PPDB Interaction (Simulasi external.html)
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.getElementById('fileKK');
+  const fileNameDisp = document.getElementById('fileNameDisp');
+  const ppdbForm = document.getElementById('ppdbForm');
+
+  // Custom File Upload Visual Feedback
+  if (fileInput) {
+    fileInput.addEventListener('change', function(e) {
+      if (this.files && this.files.length > 0) {
+        fileNameDisp.textContent = this.files[0].name;
+        fileNameDisp.style.color = '#0b2346';
+        fileNameDisp.style.fontWeight = '600';
+      } else {
+        fileNameDisp.textContent = 'Belum ada file terpilih (PDF, JPG)';
+        fileNameDisp.style.color = '#8090a8';
+        fileNameDisp.style.fontWeight = '400';
+      }
+    });
+  }
+
+  // Validasi Form dan Submit Feedback
+  if (ppdbForm) {
+    ppdbForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const btnSubmit = document.getElementById('btnSubmitForm');
+      btnSubmit.innerHTML = '<span class="loading-spinner"></span> Memproses...';
+      btnSubmit.disabled = true;
+
+      // Simulasi proses network
+      setTimeout(() => {
+        showToast('Pendaftaran berhasil dikirim! Silakan cek email secara berkala.', 'success');
+        ppdbForm.reset();
+        
+        if (fileNameDisp) {
+          fileNameDisp.textContent = 'Belum ada file terpilih (PDF, JPG)';
+          fileNameDisp.style.color = '#8090a8';
+          fileNameDisp.style.fontWeight = '400';
+        }
+
+        btnSubmit.innerHTML = 'Kirim Pendaftaran';
+        btnSubmit.disabled = false;
+
+        // Ubah state stepper ke selesai
+        const steps = document.querySelectorAll('.stepper-ui .step');
+        if(steps.length > 0) {
+          steps.forEach(s => s.classList.add('active'));
+        }
+      }, 1500);
+    });
+  }
 });
 
 // Klik backdrop modal = tutup
