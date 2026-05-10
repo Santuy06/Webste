@@ -10,10 +10,17 @@
 
 <header class="site-header">
   <div class="header-logo">
-    <img src="logo.png" class="logo-img">
+    <img src="logo.png" class="logo-img" alt="Logo SMAN 1 Bantarbolang">
     <div class="logo-text">
       <span class="logo-name">SMAN 1</span>
       <span class="logo-sub">Bantarbolang</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="lang-switcher">
+      <button id="langID" class="btn-lang active" aria-label="Bahasa Indonesia">ID</button>
+      <span class="lang-sep">|</span>
+      <button id="langEN" class="btn-lang" aria-label="English">EN</button>
     </div>
   </div>
 </header>
@@ -21,83 +28,83 @@
 <section class="portal-section">
   <div class="portal-container">
     <div class="portal-header">
-      <h1>Portal PPDB Online Terpadu</h1>
-      <p>Silakan lengkapi formulir pendaftaran di bawah ini. Pastikan data yang diinput sesuai dengan dokumen asli.</p>
+      <h1 data-i18n="portal_title">Portal PPDB Online Terpadu</h1>
+      <p data-i18n="portal_desc">Silakan lengkapi formulir pendaftaran di bawah ini. Pastikan data yang diinput sesuai dengan dokumen asli.</p>
     </div>
 
     <!-- Stepper (Output Feedback / Progress) -->
     <div class="stepper-ui">
-      <div class="step active">
-        <div class="step-circle">1</div>
-        <span>Data Diri</span>
+      <div class="step active" aria-current="step">
+        <div class="step-circle" aria-hidden="true">1</div>
+        <span data-i18n="step_data">Data Diri</span>
       </div>
       <div class="step-line"></div>
       <div class="step">
-        <div class="step-circle">2</div>
-        <span>Berkas</span>
+        <div class="step-circle" aria-hidden="true">2</div>
+        <span data-i18n="step_berkas">Berkas</span>
       </div>
       <div class="step-line"></div>
       <div class="step">
-        <div class="step-circle">3</div>
-        <span>Selesai</span>
+        <div class="step-circle" aria-hidden="true">3</div>
+        <span data-i18n="step_selesai">Selesai</span>
       </div>
     </div>
 
     <form class="portal-form" id="ppdbForm">
       <!-- Input Text -->
       <div class="form-group">
-        <label for="nisn">NISN <span class="req">*</span></label>
-        <input type="text" id="nisn" name="nisn" placeholder="Masukkan 10 digit NISN" required pattern="\d{10}">
-        <span class="error-msg">Format NISN tidak valid (harus 10 angka).</span>
+        <label for="nisn"><span data-i18n="lbl_nisn">NISN</span> <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="nisn" name="nisn" placeholder="Masukkan 10 digit NISN" required pattern="\d{10}" aria-required="true" aria-describedby="nisn-error" data-i18n-placeholder="ph_nisn">
+        <span class="error-msg" id="nisn-error" data-i18n="err_nisn">Format NISN tidak valid (harus 10 angka).</span>
       </div>
 
       <div class="form-group">
-        <label for="namaLengkap">Nama Lengkap <span class="req">*</span></label>
-        <input type="text" id="namaLengkap" name="nama" placeholder="Sesuai Ijazah/Akte Kelahiran" required>
+        <label for="namaLengkap"><span data-i18n="lbl_nama">Nama Lengkap</span> <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="namaLengkap" name="nama" placeholder="Sesuai Ijazah/Akte Kelahiran" required aria-required="true" data-i18n-placeholder="ph_nama">
       </div>
 
       <!-- UI Control: Select (Dropdown) -->
       <div class="form-group">
-        <label for="jalurDaftar">Jalur Pendaftaran <span class="req">*</span></label>
-        <select id="jalurDaftar" name="jalur" required>
-          <option value="" disabled selected>-- Pilih Jalur --</option>
-          <option value="zonasi">Zonasi</option>
-          <option value="prestasi">Prestasi</option>
-          <option value="afirmasi">Afirmasi</option>
-          <option value="pindah">Perpindahan Orang Tua</option>
+        <label for="jalurDaftar"><span data-i18n="lbl_jalur">Jalur Pendaftaran</span> <span class="req" aria-hidden="true">*</span></label>
+        <select id="jalurDaftar" name="jalur" required aria-required="true">
+          <option value="" disabled selected data-i18n="opt_jalur_pilih">-- Pilih Jalur --</option>
+          <option value="zonasi" data-i18n="opt_zonasi">Zonasi</option>
+          <option value="prestasi" data-i18n="opt_prestasi">Prestasi</option>
+          <option value="afirmasi" data-i18n="opt_afirmasi">Afirmasi</option>
+          <option value="pindah" data-i18n="opt_pindah">Perpindahan Orang Tua</option>
         </select>
       </div>
 
       <!-- UI Control: Radio Buttons -->
       <div class="form-group">
-        <label>Jenis Kelamin <span class="req">*</span></label>
-        <div class="radio-group">
+        <label><span data-i18n="lbl_jk">Jenis Kelamin</span> <span class="req" aria-hidden="true">*</span></label>
+        <div class="radio-group" role="radiogroup" aria-required="true">
           <label class="radio-label">
             <input type="radio" name="jk" value="L" required>
-            <span class="custom-radio"></span> Laki-laki
+            <span class="custom-radio" aria-hidden="true"></span> <span data-i18n="radio_l">Laki-laki</span>
           </label>
           <label class="radio-label">
             <input type="radio" name="jk" value="P" required>
-            <span class="custom-radio"></span> Perempuan
+            <span class="custom-radio" aria-hidden="true"></span> <span data-i18n="radio_p">Perempuan</span>
           </label>
         </div>
       </div>
 
       <!-- UI Control: File Upload -->
       <div class="form-group">
-        <label for="fileKK">Unggah Kartu Keluarga (KK) <span class="req">*</span></label>
+        <label for="fileKK"><span data-i18n="lbl_kk">Unggah Kartu Keluarga (KK)</span> <span class="req" aria-hidden="true">*</span></label>
         <div class="file-upload-wrapper">
-          <input type="file" id="fileKK" name="kk" accept=".pdf, .jpg, .png" class="file-input" required>
-          <div class="file-dummy" id="fileDummyTarget">
-            <span class="file-btn">Pilih File</span>
-            <span class="file-name" id="fileNameDisp">Belum ada file terpilih (PDF, JPG)</span>
+          <input type="file" id="fileKK" name="kk" accept=".pdf, .jpg, .png" class="file-input" required aria-required="true">
+          <div class="file-dummy" id="fileDummyTarget" aria-hidden="true">
+            <span class="file-btn" data-i18n="btn_pilih_file">Pilih File</span>
+            <span class="file-name" id="fileNameDisp" data-i18n="txt_belum_pilih">Belum ada file terpilih (PDF, JPG)</span>
           </div>
         </div>
       </div>
 
       <div class="form-actions">
-        <button type="button" class="btn-secondary" onclick="window.close()">Batal</button>
-        <button type="submit" class="btn-primary" id="btnSubmitForm">Kirim Pendaftaran</button>
+        <button type="button" class="btn-secondary" onclick="window.close()" data-i18n="btn_batal">Batal</button>
+        <button type="submit" class="btn-primary" id="btnSubmitForm" data-i18n="btn_kirim">Kirim Pendaftaran</button>
       </div>
     </form>
   </div>
@@ -106,5 +113,50 @@
 <!-- Toast Notification Container (Output UI Control) -->
 <div id="toastContainer" class="toast-container"></div>
 
+<!-- ===== ACCESSIBILITY WIDGET ===== -->
+<div class="a11y-widget">
+  <button class="a11y-toggle" id="a11yToggle" title="Menu Aksesibilitas" aria-label="Buka Menu Aksesibilitas" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 8v4"/><path d="M12 16h.01"/><path d="M8 12h8"/> <!-- Simple icon -->
+      <circle cx="12" cy="7" r="2" fill="currentColor" stroke="none"/>
+      <path d="M12 10v6"/>
+      <path d="M8 12h8"/>
+      <path d="M12 16l-3 4"/>
+      <path d="M12 16l3 4"/>
+    </svg>
+  </button>
+  <div class="a11y-menu" id="a11yMenu" aria-hidden="true">
+    <div class="a11y-header">
+      <h4>Aksesibilitas</h4>
+      <button id="a11yClose" class="a11y-close-btn" aria-label="Tutup Menu">&times;</button>
+    </div>
+    
+    <div class="a11y-section">
+      <label for="textSizeSlider" class="a11y-label">
+        <span aria-hidden="true">🔠</span> Ukuran Teks: <span id="textSizeVal">100%</span>
+      </label>
+      <input type="range" id="textSizeSlider" class="a11y-slider" min="100" max="180" step="10" value="100">
+    </div>
+
+    <div class="a11y-section">
+      <label class="a11y-label"><span aria-hidden="true">👁️</span> Mode Kontras:</label>
+      <div class="contrast-options">
+        <button class="theme-btn theme-default active" data-theme="default" title="Normal">A</button>
+        <button class="theme-btn theme-dark" data-theme="dark" title="Mode Gelap">A</button>
+        <button class="theme-btn theme-yellow" data-theme="yellow" title="Hitam-Kuning">A</button>
+        <button class="theme-btn theme-gray" data-theme="gray" title="Grayscale">A</button>
+      </div>
+    </div>
+
+    <div class="a11y-section">
+      <button id="btnReadText" class="a11y-btn-full" aria-label="Bacakan Teks Halaman">
+        <span aria-hidden="true" class="tts-icon">🔊</span> <span class="tts-text">Bacakan Halaman</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -14,14 +14,14 @@
 <div class="spotlight-overlay" id="spotlightOverlay">
   <div class="spotlight-inner">
     <div class="spotlight-input-wrap">
-      <svg class="spotlight-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="spotlight-icon" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="spotlightInput" placeholder="Cari berita, program, PPDB…" autocomplete="off">
-      <button id="spotlightClose" class="spotlight-esc" title="Tutup (Esc)">ESC</button>
+      <input type="text" id="spotlightInput" placeholder="Cari berita, program, PPDB…" autocomplete="off" data-i18n-placeholder="search_placeholder">
+      <button id="spotlightClose" class="spotlight-esc" title="Tutup (Esc)" aria-label="Tutup pencarian" data-i18n="btn_close_search">ESC</button>
     </div>
-    <div class="spotlight-results" id="spotlightResults"></div>
-    <div class="spotlight-hint">Tekan <kbd>Enter</kbd> untuk cari · <kbd>Esc</kbd> untuk tutup</div>
+    <div class="spotlight-results" id="spotlightResults" aria-live="polite"></div>
+    <div class="spotlight-hint" data-i18n="search_hint">Tekan <kbd>Enter</kbd> untuk cari · <kbd>Esc</kbd> untuk tutup</div>
   </div>
 </div>
 
@@ -44,7 +44,7 @@
 
         <!-- Profil -->
         <li class="nav-item has-dropdown">
-          <span class="nav-link">Profil <span class="nav-arrow">˅</span></span>
+          <span class="nav-link" aria-haspopup="true" aria-expanded="false" tabindex="0"><span data-i18n="nav_profil">Profil</span> <span class="nav-arrow" aria-hidden="true">˅</span></span>
           <div class="nav-dropdown">
             <ul>
               <li><a href="#">Visi Misi</a></li>
@@ -56,7 +56,7 @@
 
         <!-- Akademik -->
         <li class="nav-item has-dropdown">
-          <span class="nav-link">Akademik <span class="nav-arrow">˅</span></span>
+          <span class="nav-link" aria-haspopup="true" aria-expanded="false" tabindex="0"><span data-i18n="nav_akademik">Akademik</span> <span class="nav-arrow" aria-hidden="true">˅</span></span>
           <div class="nav-dropdown">
             <ul>
               <li><a href="#">Kurikulum</a></li>
@@ -68,7 +68,7 @@
 
         <!-- Informasi Publik -->
         <li class="nav-item has-dropdown">
-          <span class="nav-link">Informasi Publik <span class="nav-arrow">˅</span></span>
+          <span class="nav-link" aria-haspopup="true" aria-expanded="false" tabindex="0"><span data-i18n="nav_informasi">Informasi Publik</span> <span class="nav-arrow" aria-hidden="true">˅</span></span>
           <div class="nav-dropdown">
             <ul>
               <li><a href="#">Berita</a></li>
@@ -80,7 +80,7 @@
 
         <!-- PPDB -->
         <li class="nav-item has-dropdown">
-          <span class="nav-link">PPDB <span class="nav-arrow">˅</span></span>
+          <span class="nav-link" aria-haspopup="true" aria-expanded="false" tabindex="0"><span data-i18n="nav_ppdb">PPDB</span> <span class="nav-arrow" aria-hidden="true">˅</span></span>
           <div class="nav-dropdown">
             <ul>
               <li><a href="#">Pendaftaran Online</a></li>
@@ -95,12 +95,17 @@
 
     <!-- Aksi kanan: Search + CTA -->
     <div class="header-actions">
-      <button class="search-trigger-btn" id="searchTrigger" title="Cari">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="lang-switcher">
+        <button id="langID" class="btn-lang active" aria-label="Bahasa Indonesia">ID</button>
+        <span class="lang-sep">|</span>
+        <button id="langEN" class="btn-lang" aria-label="English">EN</button>
+      </div>
+      <button class="search-trigger-btn" id="searchTrigger" title="Cari" aria-label="Buka pencarian">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <a href="#ppdb-section" class="btn-cta">PPDB 2024/2025 &rsaquo;</a>
+      <a href="#ppdb-section" class="btn-cta" data-i18n="btn_cta_ppdb">PPDB 2024/2025 &rsaquo;</a>
     </div>
   </div>
 </header>
@@ -118,9 +123,9 @@
 <section class="hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1>Selamat Datang di<br>SMAN 1 Bantarbolang</h1>
-    <p>Indonesian high school pendaftaran online untuk wilayah Bantarbolang. Selamat Datang di portal resmi penerimaan peserta didik baru (PPDB) SMAN 1 Bantarbolang.</p>
-    <a href="#ppdb-section" class="btn-hero">Learn More &rsaquo;</a>
+    <h1 data-i18n="hero_title">Selamat Datang di<br>SMAN 1 Bantarbolang</h1>
+    <p data-i18n="hero_desc">Indonesian high school pendaftaran online untuk wilayah Bantarbolang. Selamat Datang di portal resmi penerimaan peserta didik baru (PPDB) SMAN 1 Bantarbolang.</p>
+    <a href="#ppdb-section" class="btn-hero" data-i18n="btn_learn_more">Learn More &rsaquo;</a>
   </div>
 </section>
 
@@ -140,31 +145,33 @@
 </div>
 
 <!-- ===== PPDB SECTION ===== -->
-<section class="ppdb-section" id="ppdb-section">
-  <div class="ppdb-img">
+<section class="ppdb-section" id="ppdb-section" aria-labelledby="ppdb-heading">
+  <figure class="ppdb-img">
     <img
       src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop&q=80"
-      alt="Siswa SMA belajar bersama"
+      alt="Sekelompok siswa SMA sedang belajar dan berdiskusi bersama"
       loading="lazy">
-  </div>
+    <figcaption class="sr-only">Visualisasi kebersamaan siswa di lingkungan sekolah.</figcaption>
+  </figure>
   <div class="ppdb-info">
-    <h2 class="ppdb-title"><span class="text-gold">PPDB</span> Pendaftaran Online</h2>
+    <h2 class="ppdb-title" id="ppdb-heading"><span class="text-gold" data-i18n="ppdb_highlight">PPDB</span> <span data-i18n="ppdb_title">Pendaftaran Online</span></h2>
     <p>SMAN 1 Bantarbolang memfasilitasi seleksi penerimaan siswa baru, pendaftaran online, dan penjabaran jalur pendaftaran seperti prestasi, zonasi, dan afirmasi.</p>
     <div class="ppdb-btn-group">
-      <a href="#" class="btn-ppdb">Learn More &rsaquo;</a>
+      <a href="#" class="btn-ppdb" data-i18n="btn_learn_more">Learn More &rsaquo;</a>
       <!-- External / New Window: membuka portal resmi di tab baru -->
       <a href="external.html" 
          target="_blank" 
          rel="noopener noreferrer" 
          class="btn-external"
-         title="Membuka Portal Resmi PPDB di tab/window baru">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+         title="Membuka Portal Resmi PPDB di tab/window baru"
+         aria-label="Portal PPDB Dinas Pendidikan (Buka di tab baru)">
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
           <polyline points="15 3 21 3 21 9"/>
           <line x1="10" y1="14" x2="21" y2="3"/>
         </svg>
-        Portal PPDB Dinas Pendidikan
-        <span class="ext-badge">Tab Baru</span>
+        <span data-i18n="btn_portal_ppdb">Portal PPDB Dinas Pendidikan</span>
+        <span class="ext-badge" data-i18n="badge_new_tab">Tab Baru</span>
       </a>
     </div>
   </div>
@@ -205,6 +212,51 @@
 </footer>
 
 <div id="toastContainer" class="toast-container"></div>
+
+<!-- ===== ACCESSIBILITY WIDGET ===== -->
+<div class="a11y-widget">
+  <button class="a11y-toggle" id="a11yToggle" title="Menu Aksesibilitas" aria-label="Buka Menu Aksesibilitas" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 8v4"/><path d="M12 16h.01"/><path d="M8 12h8"/> <!-- Simple icon -->
+      <circle cx="12" cy="7" r="2" fill="currentColor" stroke="none"/>
+      <path d="M12 10v6"/>
+      <path d="M8 12h8"/>
+      <path d="M12 16l-3 4"/>
+      <path d="M12 16l3 4"/>
+    </svg>
+  </button>
+  <div class="a11y-menu" id="a11yMenu" aria-hidden="true">
+    <div class="a11y-header">
+      <h4>Aksesibilitas</h4>
+      <button id="a11yClose" class="a11y-close-btn" aria-label="Tutup Menu">&times;</button>
+    </div>
+    
+    <div class="a11y-section">
+      <label for="textSizeSlider" class="a11y-label">
+        <span aria-hidden="true">🔠</span> Ukuran Teks: <span id="textSizeVal">100%</span>
+      </label>
+      <input type="range" id="textSizeSlider" class="a11y-slider" min="100" max="180" step="10" value="100">
+    </div>
+
+    <div class="a11y-section">
+      <label class="a11y-label"><span aria-hidden="true">👁️</span> Mode Kontras:</label>
+      <div class="contrast-options">
+        <button class="theme-btn theme-default active" data-theme="default" title="Normal">A</button>
+        <button class="theme-btn theme-dark" data-theme="dark" title="Mode Gelap">A</button>
+        <button class="theme-btn theme-yellow" data-theme="yellow" title="Hitam-Kuning">A</button>
+        <button class="theme-btn theme-gray" data-theme="gray" title="Grayscale">A</button>
+      </div>
+    </div>
+
+    <div class="a11y-section">
+      <button id="btnReadText" class="a11y-btn-full" aria-label="Bacakan Teks Halaman">
+        <span aria-hidden="true" class="tts-icon">🔊</span> <span class="tts-text">Bacakan Halaman</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>

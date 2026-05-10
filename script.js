@@ -1,19 +1,35 @@
 // =====================================================
-// Dropdown Menu – Click to Toggle
+// Dropdown Menu – Click to Toggle & Accessibility
 // =====================================================
 const navItems = document.querySelectorAll('.nav-item.has-dropdown');
 
 function closeAllDropdowns() {
-  navItems.forEach(item => item.classList.remove('open'));
+  navItems.forEach(item => {
+    item.classList.remove('open');
+    const trigger = item.querySelector('.nav-link');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  });
 }
 
 navItems.forEach(item => {
   const trigger = item.querySelector('.nav-link');
+  if (!trigger) return;
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = item.classList.contains('open');
     closeAllDropdowns();
-    if (!isOpen) item.classList.add('open');
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  });
+  
+  // Keyboard Accessibility
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      trigger.click();
+    }
   });
 });
 
@@ -59,11 +75,13 @@ const searchIcon = `<svg class="sr-icon" width="16" height="16" viewBox="0 0 24 
 
 function openSpotlight() {
   spotlightOverlay.classList.add('open');
+  searchTrigger.setAttribute('aria-expanded', 'true');
   setTimeout(() => spotlightInput.focus(), 80);
 }
 
 function closeSpotlight() {
   spotlightOverlay.classList.remove('open');
+  searchTrigger.setAttribute('aria-expanded', 'false');
   spotlightInput.value = '';
   spotlightResults.innerHTML = '';
 }
@@ -220,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const btnSubmit = document.getElementById('btnSubmitForm');
+      const originalText = btnSubmit.innerHTML;
       btnSubmit.innerHTML = '<span class="loading-spinner"></span> Memproses...';
       btnSubmit.disabled = true;
 
@@ -234,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
           fileNameDisp.style.fontWeight = '400';
         }
 
-        btnSubmit.innerHTML = 'Kirim Pendaftaran';
+        btnSubmit.innerHTML = originalText;
         btnSubmit.disabled = false;
 
         // Ubah state stepper ke selesai
@@ -248,6 +267,250 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Klik backdrop modal = tutup
-modalBackdrop.addEventListener('click', (e) => {
-  if (e.target === modalBackdrop) closeModal();
+if (modalBackdrop) {
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+}
+
+// =====================================================
+// I18N (Internationalization) & L10N (Localization)
+// =====================================================
+const i18nDict = {
+  id: {
+    // index.html
+    search_placeholder: "Cari berita, program, PPDB…",
+    search_hint: "Tekan <kbd>Enter</kbd> untuk cari · <kbd>Esc</kbd> untuk tutup",
+    btn_close_search: "ESC",
+    nav_profil: "Profil",
+    nav_akademik: "Akademik",
+    nav_informasi: "Informasi Publik",
+    nav_ppdb: "PPDB",
+    btn_cta_ppdb: "PPDB 2024/2025 &rsaquo;",
+    hero_title: "Selamat Datang di<br>SMAN 1 Bantarbolang",
+    hero_desc: "Pendaftaran online untuk wilayah Bantarbolang. Selamat Datang di portal resmi penerimaan peserta didik baru (PPDB) SMAN 1 Bantarbolang.",
+    btn_learn_more: "Learn More &rsaquo;",
+    ppdb_highlight: "PPDB",
+    ppdb_title: "Pendaftaran Online",
+    btn_portal_ppdb: "Portal PPDB Dinas Pendidikan",
+    badge_new_tab: "Tab Baru",
+    // external.html
+    portal_title: "Portal PPDB Online Terpadu",
+    portal_desc: "Silakan lengkapi formulir pendaftaran di bawah ini. Pastikan data yang diinput sesuai dengan dokumen asli.",
+    step_data: "Data Diri",
+    step_berkas: "Berkas",
+    step_selesai: "Selesai",
+    lbl_nisn: "NISN",
+    ph_nisn: "Masukkan 10 digit NISN",
+    err_nisn: "Format NISN tidak valid (harus 10 angka).",
+    lbl_nama: "Nama Lengkap",
+    ph_nama: "Sesuai Ijazah/Akte Kelahiran",
+    lbl_jalur: "Jalur Pendaftaran",
+    opt_jalur_pilih: "-- Pilih Jalur --",
+    opt_zonasi: "Zonasi",
+    opt_prestasi: "Prestasi",
+    opt_afirmasi: "Afirmasi",
+    opt_pindah: "Perpindahan Orang Tua",
+    lbl_jk: "Jenis Kelamin",
+    radio_l: "Laki-laki",
+    radio_p: "Perempuan",
+    lbl_kk: "Unggah Kartu Keluarga (KK)",
+    btn_pilih_file: "Pilih File",
+    txt_belum_pilih: "Belum ada file terpilih (PDF, JPG)",
+    btn_batal: "Batal",
+    btn_kirim: "Kirim Pendaftaran"
+  },
+  en: {
+    // index.html
+    search_placeholder: "Search news, programs, admissions…",
+    search_hint: "Press <kbd>Enter</kbd> to search · <kbd>Esc</kbd> to close",
+    btn_close_search: "ESC",
+    nav_profil: "Profile",
+    nav_akademik: "Academic",
+    nav_informasi: "Public Info",
+    nav_ppdb: "Admissions",
+    btn_cta_ppdb: "Admissions 2024/2025 &rsaquo;",
+    hero_title: "Welcome to<br>SMAN 1 Bantarbolang",
+    hero_desc: "Online registration for Bantarbolang region. Welcome to the official portal for new student admissions at SMAN 1 Bantarbolang.",
+    btn_learn_more: "Learn More &rsaquo;",
+    ppdb_highlight: "Admissions",
+    ppdb_title: "Online Registration",
+    btn_portal_ppdb: "Education Dept Admissions Portal",
+    badge_new_tab: "New Tab",
+    // external.html
+    portal_title: "Integrated Online Admissions Portal",
+    portal_desc: "Please complete the registration form below. Ensure the inputted data matches your original documents.",
+    step_data: "Personal Data",
+    step_berkas: "Documents",
+    step_selesai: "Complete",
+    lbl_nisn: "Student ID (NISN)",
+    ph_nisn: "Enter 10 digit NISN",
+    err_nisn: "Invalid NISN format (must be 10 digits).",
+    lbl_nama: "Full Name",
+    ph_nama: "As per Birth Certificate",
+    lbl_jalur: "Admission Path",
+    opt_jalur_pilih: "-- Select Path --",
+    opt_zonasi: "Zoning",
+    opt_prestasi: "Achievement",
+    opt_afirmasi: "Affirmation",
+    opt_pindah: "Parental Transfer",
+    lbl_jk: "Gender",
+    radio_l: "Male",
+    radio_p: "Female",
+    lbl_kk: "Upload Family Card (KK)",
+    btn_pilih_file: "Choose File",
+    txt_belum_pilih: "No file chosen (PDF, JPG)",
+    btn_batal: "Cancel",
+    btn_kirim: "Submit Registration"
+  }
+};
+
+function changeLanguage(lang) {
+  document.documentElement.lang = lang;
+  
+  // Update button active state
+  document.querySelectorAll('.btn-lang').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(lang === 'id' ? 'langID' : 'langEN');
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const dict = i18nDict[lang];
+  if (!dict) return;
+
+  // Translate text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.innerHTML = dict[key]; // use innerHTML for <br> and <kbd>
+  });
+
+  // Translate placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key]) el.setAttribute('placeholder', dict[key]);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btnID = document.getElementById('langID');
+  const btnEN = document.getElementById('langEN');
+
+  if (btnID) btnID.addEventListener('click', () => changeLanguage('id'));
+  if (btnEN) btnEN.addEventListener('click', () => changeLanguage('en'));
+});
+
+// =====================================================
+// Accessibility Widget Logic (Slider, Themes, TTS)
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const a11yToggle = document.getElementById('a11yToggle');
+  const a11yMenu = document.getElementById('a11yMenu');
+  const a11yClose = document.getElementById('a11yClose');
+  const btnReadText = document.getElementById('btnReadText');
+  const textSizeSlider = document.getElementById('textSizeSlider');
+  const textSizeVal = document.getElementById('textSizeVal');
+  const themeBtns = document.querySelectorAll('.theme-btn');
+
+  if (!a11yToggle || !a11yMenu) return;
+
+  // Toggle Menu
+  const toggleMenu = (e) => {
+    if (e) e.stopPropagation();
+    const isOpen = a11yMenu.classList.contains('open');
+    if (isOpen) {
+      a11yMenu.classList.remove('open');
+      a11yMenu.setAttribute('aria-hidden', 'true');
+      a11yToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      a11yMenu.classList.add('open');
+      a11yMenu.setAttribute('aria-hidden', 'false');
+      a11yToggle.setAttribute('aria-expanded', 'true');
+    }
+  };
+
+  a11yToggle.addEventListener('click', toggleMenu);
+  if (a11yClose) a11yClose.addEventListener('click', toggleMenu);
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!a11yToggle.contains(e.target) && !a11yMenu.contains(e.target)) {
+      a11yMenu.classList.remove('open');
+      a11yMenu.setAttribute('aria-hidden', 'true');
+      a11yToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Text Size Slider
+  if (textSizeSlider && textSizeVal) {
+    textSizeSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      textSizeVal.textContent = val + '%';
+      
+      // Menggunakan CSS zoom agar semua elemen (px, em, dll) ikut membesar proporsional
+      // dan tidak merusak layout.
+      document.body.style.zoom = val + '%';
+      
+      // Agar popup aksesibilitas TIDAK ikut membesar (tetap ukuran normal)
+      // Kita harus menetralisir efek zoom dari body dengan membaginya kembali.
+      const widget = document.querySelector('.a11y-widget');
+      if (widget) {
+        const reverseZoom = (10000 / parseInt(val));
+        widget.style.zoom = reverseZoom + '%';
+      }
+    });
+  }
+
+  // Theme Switcher
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const theme = e.target.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', theme); // Set di HTML tag
+      
+      // Update active state
+      themeBtns.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+    });
+  });
+
+  // Text to Speech (Read Page)
+  let isReading = false;
+  if (btnReadText) {
+    btnReadText.addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) {
+        showToast('Browser Anda tidak mendukung fitur baca teks (TTS).', 'warning');
+        return;
+      }
+
+      if (isReading) {
+        window.speechSynthesis.cancel();
+        isReading = false;
+        btnReadText.innerHTML = '<span aria-hidden="true" class="tts-icon">🔊</span> <span class="tts-text">Bacakan Halaman</span>';
+      } else {
+        let textToRead = "";
+        const hero = document.querySelector('.hero-content');
+        const ppdb = document.querySelector('.ppdb-info');
+        const portal = document.querySelector('.portal-header');
+        
+        if (hero) textToRead += hero.innerText + ". ";
+        if (ppdb) textToRead += ppdb.innerText + ". ";
+        if (portal) textToRead += portal.innerText + ". ";
+
+        if (!textToRead.trim()) {
+          textToRead = document.body.innerText;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        const currentLang = document.documentElement.lang === 'en' ? 'en-US' : 'id-ID';
+        utterance.lang = currentLang;
+        utterance.rate = 0.9;
+
+        utterance.onend = () => {
+          isReading = false;
+          btnReadText.innerHTML = '<span aria-hidden="true" class="tts-icon">🔊</span> <span class="tts-text">Bacakan Halaman</span>';
+        };
+
+        window.speechSynthesis.speak(utterance);
+        isReading = true;
+        btnReadText.innerHTML = '<span aria-hidden="true" class="tts-icon">🔇</span> <span class="tts-text">Berhenti Membaca</span>';
+      }
+    });
+  }
 });
